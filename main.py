@@ -1,10 +1,13 @@
 import numpy as np
 import pygame
 import sys
+import math
 
 ## Board design variables
 BLUE = (0,0,255)
 BLACK = (0,0,0)
+RED = (255,0,0)
+YELLOW = (255,255,0)
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
@@ -60,10 +63,21 @@ def winning_move(board, piece):
                 return True
 
 def draw_board(board):
+
     for col in range(COLUMN_COUNT):
         for row in range(ROW_COUNT):
             pygame.draw.rect(screen, BLUE, (col*SQUARE_SIZE,row*SQUARE_SIZE+SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE))
             pygame.draw.circle(screen, BLACK, (int(col*SQUARE_SIZE + SQUARE_SIZE/2), int(row*SQUARE_SIZE + SQUARE_SIZE + SQUARE_SIZE/2)),RADIUS)
+            
+            
+    for col in range(COLUMN_COUNT):
+        for row in range(ROW_COUNT):
+            if board[row][col]==1:
+                pygame.draw.circle(screen, RED, (int(col*SQUARE_SIZE + SQUARE_SIZE/2), height - int(row*SQUARE_SIZE + SQUARE_SIZE/2)),RADIUS)
+            elif board[row][col]==2:
+                pygame.draw.circle(screen, YELLOW, (int(col*SQUARE_SIZE + SQUARE_SIZE/2), height -  int(row*SQUARE_SIZE + SQUARE_SIZE/2)),RADIUS)
+
+    pygame.display.update()
 
 
 
@@ -90,6 +104,8 @@ screen = pygame.display.set_mode(size)
 draw_board(board)
 pygame.display.update()
 
+my_font = pygame.font.SysFont("monospace", 74)
+
 while not game_over:
     
     for event in pygame.event.get():
@@ -97,37 +113,65 @@ while not game_over:
         ## QUIT Event
         if event.type == pygame.QUIT:
             sys.exit()
+
+        ## Mouse Hover
+        if event.type == pygame.MOUSEMOTION:
+
+            pygame.draw.rect(screen, BLACK, (0,0, width, SQUARE_SIZE))
+            posx = event.pos[0]
+
+            if turn == 0:
+                pygame.draw.circle(screen, RED, (posx, int(SQUARE_SIZE/2)),RADIUS)
+            else:
+                pygame.draw.circle(screen, YELLOW, (posx, int(SQUARE_SIZE/2)),RADIUS)
+            
+        pygame.display.update()
             
         ## Down event
         if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.draw.rect(screen, BLACK, (0,0, width, SQUARE_SIZE))
+
+            # Ask the Player 1 Input
+            if turn == 0:
                 
-#             # Ask the Player 1 Input
-#             if turn == 0:
-#                 col = int(input("Player 1 Make your selection (0-6): "))
+                posx = event.pos[0]
 
-#                 if is_valid_location(board, col):
-#                     row = get_next_open_row(board, col)
-#                     drop_piece(board, row, col, 1)
+                ## For getting approximate location of the clicked col location.
+                col = int(math.floor(posx/SQUARE_SIZE))
 
-#                     if winning_move(board, 1):
-#                         print("Player 1 Wins!!! Congrats!!!")
-#                         game_over=True
+                if is_valid_location(board, col):
+                    row = get_next_open_row(board, col)
+                    drop_piece(board, row, col, 1)
 
-#             # Ask the Player 2 Input
-#             else:
-#                 col = int(input("Player 2 Make your selection (0-6): "))
+                    if winning_move(board, 1):
+                        label = my_font.render("Player 1 Wins!!" , 1, RED)
+                        screen.blit(label, (40,10)) ## To update the Specific part of the screem
 
-#                 if is_valid_location(board, col):
-#                     row = get_next_open_row(board, col)
-#                     drop_piece(board, row, col, 2)
+                        game_over=True
 
-#                     if winning_move(board, 1):
-#                         print("Player 1 Wins!!! Congrats!!!")
-#                         game_over=True
-            print_board(board)
+            # Ask the Player 2 Input
+            else:
+                posx = event.pos[0]
+                col = int(math.floor(posx/SQUARE_SIZE))
+                
+                if is_valid_location(board, col):
+                    row = get_next_open_row(board, col)
+                    drop_piece(board, row, col, 2)
 
-#             ## Moving to the next turn
-#             turn+=1
+                    if winning_move(board, 2):
+                        label = my_font.render("Player 2 Wins!!" , 1, YELLOW)
+                        screen.blit(label, (40,10)) ## To update the Specific part of the screem
 
-#             ## To alternate the turn number in just between 0 and 1 (Player1 and player2)
-#             turn%=2
+                        game_over=True
+
+            # print_board(board)
+            draw_board(board)
+
+            ## Moving to the next turn
+            turn+=1
+
+            ## To alternate the turn number in just between 0 and 1 (Player1 and player2)
+            turn%=2
+
+            if game_over:
+                pygame.time.wait(3000)
