@@ -83,7 +83,7 @@ def draw_board(board):
 
 # ## ---------------------- Start ----------------------
 board = create_board()
-print_board(board)
+# print_board(board)
 game_over = False
 turn = 0
 
