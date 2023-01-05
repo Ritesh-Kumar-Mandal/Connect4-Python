@@ -13,12 +13,12 @@ py main.py
 
 ## Playground
 7x6 board. As soon as you run the app you will be prompted to enter the Player names.
-![PlayGround](https://github.com/Ritesh-Kumar-Mandal/Connect4/blob/e9a1bd990d2de29793f59fa3cd3e4e3350afbe7c/screenshots/HomePage.png)
+![PlayGround](https://github.com/Ritesh-Kumar-Mandal/Connect4-Python/blob/3a27e3783782d3b514117f78ef944377b9490397/screenshots/Playground.png)
 
 
 ## Winnig Scenarios
 You must align four checkers horizontally, vertically, or diagonally to win the game.
-![Win1](https://github.com/Ritesh-Kumar-Mandal/Connect4/blob/cea846ad72973e2b7d462b44829d223e919e671b/screenshots/WinScenario1.png)
-![Win2](https://github.com/Ritesh-Kumar-Mandal/Connect4/blob/cea846ad72973e2b7d462b44829d223e919e671b/screenshots/WinScenario2.png)
-![Win2](https://github.com/Ritesh-Kumar-Mandal/Connect4/blob/cea846ad72973e2b7d462b44829d223e919e671b/screenshots/WinScenario3.png)
-![Win4](https://github.com/Ritesh-Kumar-Mandal/Connect4/blob/cea846ad72973e2b7d462b44829d223e919e671b/screenshots/WinScenario4.png)
+![Win1](https://github.com/Ritesh-Kumar-Mandal/Connect4-Python/blob/3a27e3783782d3b514117f78ef944377b9490397/screenshots/WinScenario1.png)
+![Win2](https://github.com/Ritesh-Kumar-Mandal/Connect4-Python/blob/3a27e3783782d3b514117f78ef944377b9490397/screenshots/WinScenario2.png)
+![Win2](https://github.com/Ritesh-Kumar-Mandal/Connect4-Python/blob/3a27e3783782d3b514117f78ef944377b9490397/screenshots/WinScenario3.png)
+![Win4](https://github.com/Ritesh-Kumar-Mandal/Connect4-Python/blob/3a27e3783782d3b514117f78ef944377b9490397/screenshots/WinScenario4.png)
